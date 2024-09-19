@@ -112,6 +112,11 @@ body, html {
   button:hover {
     background-color: #e66a00;
   }
+  .error-txt {
+    text-align:left;
+    /* margin-top: 10px; */
+    margin-bottom: 10px;
+  }
   
   /* Responsive Design */
   @media (max-width: 768px) {
