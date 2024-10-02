@@ -1,21 +1,21 @@
-import { useState } from 'react'
-import './App.css'
-import 'bootstrap/dist/css/bootstrap.min.css'
-import Login from './Components/Login'
-import { BrowserRouter, Routes, Route } from "react-router-dom"
-import { Dashboard } from './Components/Dashboard'
+import { Routes, Route } from "react-router-dom";
+import Dashboard from "./components/Dashboard/Dashboard";
+import Login from "./components/Login/Login";
+import User from "./components/user/User";
+import Donation from "./components/donation/Donation";
+import Category from "./components/category/Category";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path='/auth/admin-login' element={<Login />}></Route>
-        <Route path='/dashboard' element={<Dashboard />}></Route>
-      </Routes>
-    </BrowserRouter>
-  )
+    <Routes>
+      <Route path="/" element={<Login />} />
+      <Route path="/dashboard" element={<Dashboard />} />
+      <Route path="/users" element={<User />} />
+      <Route path="/donation" element={<Donation />} />
+      <Route path="/category" element={<Category />} />
+      {/* Add other routes here */}
+    </Routes>
+  );
 }
 
-export default App
+export default App;

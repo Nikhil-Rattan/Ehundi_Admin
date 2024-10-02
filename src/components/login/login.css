@@ -1,0 +1,174 @@
+/* General container styles */
+.main-container-page {
+  margin-top: 5%;
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Center vertically */
+  height: 85vh; /* Use viewport height */
+}
+
+.login-container-page {
+  display: flex;
+  width: 90%; /* Full width for responsiveness */
+  max-width: 400px; /* Set a max width for better control */
+  padding: 2rem; /* Padding for consistency */
+  box-shadow: 5px 5px 15px 15px #1f1c1c1a; /* Slightly increased shadow for depth */
+  border-radius: 10px;
+}
+
+.login-box {
+  margin-left: 5%;
+  background-color: #fff; /* White background for the box */
+  width: 70%; /* Take full width of the container */
+  border-radius: 8px;
+  padding-left: 1rem;
+  /* padding: 2rem; Consistent padding for inner spacing */
+  display: flex; /* Use flexbox for layout */
+  flex-direction: column; /* Stack items vertically */
+  justify-content: center; /* Center content vertically */
+  align-items: center;
+  height: auto; /* Allow height to adjust based on content */
+  /* background-color: red; */
+}
+
+/* .welcomeImage {
+  margin-top: 10%;
+  width: 20%;
+  height: 30%;
+  background-image: url("https://i.ibb.co/p36Z5yF/rocket-logo.png");
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+} */
+
+/* Form content */
+.login-content {
+  /* background-color: red; */
+  width: 100%;
+  /* padding: 20px; */
+}
+
+.login-header h2 {
+  /* padding-top: 10%; */
+  font-size: 24px;
+  font-weight: bold;
+  color: #171a1f;
+  padding-bottom: 7%;
+}
+
+.login-header .rocket-emoji {
+  font-size: 18px;
+}
+
+.login-subheader div {
+  font-size: 14px;
+  color: #9095a1;
+  margin-bottom: 40px;
+}
+
+.input-group {
+  margin-bottom: 40px;
+}
+
+.input-field {
+  margin-bottom: 15px;
+  /* position: relative; */
+}
+
+.input-field label {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.input-field input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #bdc1ca;
+  border-radius: 4px;
+}
+
+.password-custom {
+  padding-top: 8%;
+  position: relative;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 10px;
+  top: 30px;
+  background: none;
+  border: none;
+}
+
+.password-info {
+  position: absolute;
+  right: 40px;
+  top: 30px;
+  background-color: white;
+  border: 1px solid gray;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.password-info span {
+  font-size: 12px;
+}
+
+/* Forgot password */
+.forgot-password {
+  text-align: center;
+}
+
+.forgot-password-link {
+  color: red;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+/* Submit button */
+.submit-button-container {
+  text-align: center;
+  margin-left: 5%;
+}
+
+.submit-button {
+  width: 60%;
+  background-color: red;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  align-items: center;
+}
+
+/* Register section */
+.register {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.sign-up-link {
+  color: red;
+  font-weight: bold;
+  margin-left: 5px;
+}
+
+/* Mobile application section */
+.mobile-app-text h6 {
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  color: #171a1f;
+}
+
+.store-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}

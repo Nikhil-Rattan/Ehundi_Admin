@@ -1,0 +1,48 @@
+.footer {
+  background-color: #f8f9fa; /* Light gray background */
+  color: #343a40; /* Dark text color */
+  padding: 20px 0; /* Padding top and bottom */
+  position: relative; /* Changed to relative to avoid issues with fixed positioning */
+  width: 100%; /* Full width */
+  text-align: center; /* Center text */
+  border-top: 1px solid #dee2e6; /* Top border */
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 1200px; /* Responsive max width */
+  padding: 0 20px; /* Padding for the container */
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px; /* Extra padding for inner content */
+}
+
+.privacy-policy {
+  font-size: 14px; /* Adjusted font size */
+}
+
+.social-links {
+  display: flex;
+  gap: 15px; /* Consistent spacing */
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.social-links i {
+  font-size: 24px; /* Set a larger size for your icons */
+  color: #343a40; /* Icon color */
+  transition: color 0.3s ease; /* Transition effect */
+}
+
+.social-links i:hover {
+  color: #007bff; /* Change color on hover */
+}
+
+.copyright {
+  margin-top: 10px; /* Spacing above copyright text */
+  font-size: 14px; /* Adjusted font size */
+}
