@@ -1,0 +1,12 @@
+.p-inputgroup {
+  width: 100%;
+}
+
+.p-inputgroup-addon {
+  background-color: #f4f4f4;
+  border-radius: 4px;
+}
+
+.p-datatable {
+  margin-top: 10px;
+}

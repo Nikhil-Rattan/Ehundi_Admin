@@ -1,14 +1,18 @@
-// src/components/SimpleTable.jsx
 import React, { useEffect, useState } from "react";
-import $ from "jquery"; // Import jQuery
+import $ from "jquery";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
 import { InputText } from "primereact/inputtext";
+import LoadingData from "../loading/LoadingData";
 
 const User = () => {
   const [users, setUsers] = useState([]);
+  const [globalFilter, setGlobalFilter] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [usersLength, setUsersLength] = useState(0);
+
   const [user, setUser] = useState({
     id: null,
     fullName: "",
@@ -17,30 +21,32 @@ const User = () => {
     role: "",
   });
   const [visible, setVisible] = useState(false);
-  // const [isEditing, setIsEditing] = useState(false);
 
-  // Fetch user data from API using jQuery AJAX
   const fetchUsers = () => {
+    setLoading(true);
     $.ajax({
-      url: "https://ehundi-api.onrender.com/auth/user-Profile", // Replace with your API URL
+      url: "https://ehundi-api.onrender.com/auth/user-Profile",
       method: "GET",
       success: (data) => {
-        console.log(data);
-
         setUsers(data);
+        setUsersLength(data.length);
+        setLoading(false);
       },
-      error: (error) => console.error("Error fetching users:", error),
+      error: (error) => {
+        console.error("Error fetching users:", error);
+        setLoading(false);
+      },
     });
   };
 
   // Open dialog for adding/editing user
-  const openDialog = (
-    user = { id: null, fullName: "", email: "", phoneNumber: "", role: "" }
-  ) => {
-    setUser(user);
-    setIsEditing(!!user.id);
-    setVisible(true);
-  };
+  // const openDialog = (
+  //   user = { id: null, fullName: "", email: "", phoneNumber: "", role: "" }
+  // ) => {
+  //   setUser(user);
+  //   setIsEditing(!!user.id);
+  //   setVisible(true);
+  // };
 
   // Handle form submission for adding/updating user
   // const handleSubmit = (e) => {
@@ -73,26 +79,58 @@ const User = () => {
   //   });
   // };
 
-  // Fetch users on component mount
   useEffect(() => {
+    localStorage.setItem("Caturl", "/users");
     fetchUsers();
   }, []);
 
+  if (loading) {
+    return <LoadingData />;
+  }
+
   return (
     <div className="card">
-      <h2 style={{ marginTop: "7%", padding: "20px" }}>USERS</h2>
-      {/* <Button label="Add User" icon="pi pi-plus" onClick={() => openDialog()} /> */}
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          padding: "2%",
+          marginTop: "5%",
+        }}
+      >
+        <h2 style={{ width: "10%", padding: "0" }}>USERS ({usersLength})</h2>
+        <div style={{ display: "flex", gap: "1rem" }}>
+          <div
+            className="p-inputgroup"
+            style={{
+              width: "auto",
+              justifyContent: "space-between",
+            }}
+          >
+            <span className="p-inputgroup-addon">
+              <i className="pi pi-search"></i>
+            </span>
+            <InputText
+              type="search"
+              placeholder="Search..."
+              onInput={(e) => setGlobalFilter(e.target.value)}
+            />
+          </div>
+        </div>
+      </div>
       <DataTable
         value={users}
         paginator
         rows={5}
         rowsPerPageOptions={[5, 10, 25]}
         style={{ padding: "0 30px " }}
+        globalFilter={globalFilter}
       >
-        <Column field="fullName" header="Full Name" />
-        <Column field="email" header="Email" />
-        <Column field="phoneNumber" header="Phone Number" />
-        <Column field="role" header="Role" />
+        <Column field="fullName" header="FULL NAME" />
+        <Column field="email" header="EMAIL" />
+        <Column field="phoneNumber" header="MOBILE NUMBER" />
+        <Column field="role" header="ROLE" />
         {/* <Column
           body={(data) => (
             <>

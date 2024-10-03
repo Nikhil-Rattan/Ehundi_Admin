@@ -1,21 +1,20 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "primeicons/primeicons.css"; // Import PrimeIcons CSS
+import "primeicons/primeicons.css";
 
 const Footer = () => {
   return (
     <div
       style={{
-        backgroundColor: "#f8f9fa", // Light gray background
-        color: "#343a40", // Dark text color
-        padding: "10px 0", // Padding top and bottom
-        position: "fixed", // Position relative
-        bottom: "0", // Position at the bottom
-        width: "100%", // Full width
-        textAlign: "center", // Center text
-        fontSize: "14px", // Font size
-        borderTop: "1px solid #dee2e6", // Top border
-        // display: "flex",
+        backgroundColor: "#f8f9fa",
+        color: "#343a40",
+        padding: "10px 0",
+        position: "fixed",
+        bottom: "0",
+        width: "100%",
+        textAlign: "center",
+        fontSize: "14px",
+        borderTop: "1px solid #dee2e6",
       }}
     >
       <div
@@ -32,38 +31,7 @@ const Footer = () => {
             Privacy Policy
           </Link>
         </div>
-        <div style={{ display: "flex", justifyContent: "center", gap: "15px" }}>
-          <Link
-            to="/"
-            style={{
-              color: "#343a40",
-              textDecoration: "none",
-              fontSize: "20px",
-            }}
-          >
-            <i className="pi pi-facebook"></i>
-          </Link>
-          <Link
-            to="/"
-            style={{
-              color: "#343a40",
-              textDecoration: "none",
-              fontSize: "20px",
-            }}
-          >
-            <i className="pi pi-twitter"></i>
-          </Link>
-          <Link
-            to="/"
-            style={{
-              color: "#343a40",
-              textDecoration: "none",
-              fontSize: "20px",
-            }}
-          >
-            <i className="pi pi-instagram"></i>
-          </Link>
-        </div>
+
         <div style={{ marginTop: "10px" }}>
           <p style={{ margin: 0 }}>
             © {new Date().getFullYear()} eHundi. All rights reserved.

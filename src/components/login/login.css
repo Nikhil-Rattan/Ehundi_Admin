@@ -1,55 +1,49 @@
-/* General container styles */
 .main-container-page {
   margin-top: 5%;
   display: flex;
   justify-content: center;
-  align-items: center; /* Center vertically */
-  height: 85vh; /* Use viewport height */
+  align-items: center;
+  height: 85vh;
+
+  background-image: url("https://www.murugantemple.com/wp-content/uploads/2021/05/slider1.jpg"); /* Set background image */
+  background-size: cover; /* Ensure the image covers the entire container */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat;
+  object-fit: contain;
+  border: "2px solid red";
+  color: black;
+  width: "100%"; /* Text color for better contrast */
+  height: "60vh";
 }
 
 .login-container-page {
   display: flex;
-  width: 90%; /* Full width for responsiveness */
-  max-width: 400px; /* Set a max width for better control */
-  padding: 2rem; /* Padding for consistency */
-  box-shadow: 5px 5px 15px 15px #1f1c1c1a; /* Slightly increased shadow for depth */
+  width: 90%;
+  max-width: 400px;
+  padding: 2rem;
+  box-shadow: 5px 5px 15px 15px #1f1c1c1a;
   border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.918);
 }
 
 .login-box {
   margin-left: 5%;
-  background-color: #fff; /* White background for the box */
-  width: 70%; /* Take full width of the container */
+  background-color: #fff;
+  width: 70%;
   border-radius: 8px;
   padding-left: 1rem;
-  /* padding: 2rem; Consistent padding for inner spacing */
-  display: flex; /* Use flexbox for layout */
-  flex-direction: column; /* Stack items vertically */
-  justify-content: center; /* Center content vertically */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  height: auto; /* Allow height to adjust based on content */
-  /* background-color: red; */
+  height: auto;
 }
 
-/* .welcomeImage {
-  margin-top: 10%;
-  width: 20%;
-  height: 30%;
-  background-image: url("https://i.ibb.co/p36Z5yF/rocket-logo.png");
-  background-position: center;
-  background-size: contain;
-  background-repeat: no-repeat;
-} */
-
-/* Form content */
 .login-content {
-  /* background-color: red; */
   width: 100%;
-  /* padding: 20px; */
 }
 
 .login-header h2 {
-  /* padding-top: 10%; */
   font-size: 24px;
   font-weight: bold;
   color: #171a1f;
@@ -72,7 +66,6 @@
 
 .input-field {
   margin-bottom: 15px;
-  /* position: relative; */
 }
 
 .input-field label {
@@ -119,7 +112,6 @@
   font-size: 12px;
 }
 
-/* Forgot password */
 .forgot-password {
   text-align: center;
 }
@@ -130,7 +122,6 @@
   text-decoration: underline;
 }
 
-/* Submit button */
 .submit-button-container {
   text-align: center;
   margin-left: 5%;
@@ -147,7 +138,6 @@
   align-items: center;
 }
 
-/* Register section */
 .register {
   text-align: center;
   margin-top: 20px;
@@ -159,7 +149,6 @@
   margin-left: 5px;
 }
 
-/* Mobile application section */
 .mobile-app-text h6 {
   text-align: center;
   font-size: 20px;

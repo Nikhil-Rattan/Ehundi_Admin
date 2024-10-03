@@ -1,37 +1,33 @@
-// src/components/Donation.jsx
 import React, { useEffect, useState } from "react";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import { Button } from "primereact/button";
-import $ from "jquery"; // Import jQuery
+import $ from "jquery";
+import { InputText } from "primereact/inputtext";
+import LoadingData from "../loading/LoadingData";
 
 const Donation = () => {
-  const [donations, setDonations] = useState([]); // State to hold the donation data
-  const [loading, setLoading] = useState(true); // State to manage loading state
-  const [formData, setFormData] = useState({
-    name: "",
-    gotra: "",
-    poojaDate: "",
-    donationAmount: "",
-    paymentStatus: "",
-  }); // State for form data
-  // const [isEditing, setIsEditing] = useState(false); // State to track if editing
+  const [globalFilter, setGlobalFilter] = useState(null);
+
+  const [donations, setDonations] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [donationLength, setDonationLength] = useState(0);
 
   useEffect(() => {
+    localStorage.setItem("Caturl", "/donation");
     fetchDonations();
-  }, []); // Fetch donations on component mount
+  }, []);
 
-  // Fetch donations from the API
   const fetchDonations = () => {
+    setLoading(true);
     $.ajax({
-      url: "https://ehundi-api.onrender.com/api/newDonations", // Replace with your API endpoint
+      url: "https://ehundi-api.onrender.com/api/newDonations",
       method: "GET",
       dataType: "json",
       success: (data) => {
-        console.log(data);
-
-        setDonations(data.donations); // Set the donation data
-        setLoading(false); // Set loading to false after fetching data
+        setDonations(data.donations);
+        setDonationLength(data.donations.length);
+        setLoading(false);
       },
       error: (error) => {
         console.error("Error fetching data:", error);
@@ -40,92 +36,44 @@ const Donation = () => {
     });
   };
 
-  // Create a new donation
-  // const createDonation = () => {
-  //   $.ajax({
-  //     url: "https://api.example.com/donations", // Replace with your API endpoint
-  //     method: "POST",
-  //     contentType: "application/json",
-  //     data: JSON.stringify(formData),
-  //     success: (data) => {
-  //       setDonations((prevDonations) => [...prevDonations, data]); // Update state with new donation
-  //       resetForm(); // Reset form after successful creation
-  //     },
-  //     error: (error) => {
-  //       console.error("Error creating donation:", error);
-  //     },
-  //   });
-  // };
-
-  // Update an existing donation
-  // const updateDonation = () => {
-  //   $.ajax({
-  //     url: `https://api.example.com/donations/${formData.id}`, // Replace with your API endpoint
-  //     method: "PUT",
-  //     contentType: "application/json",
-  //     data: JSON.stringify(formData),
-  //     success: (data) => {
-  //       setDonations((prevDonations) =>
-  //         prevDonations.map((donation) =>
-  //           donation.id === formData.id ? data : donation
-  //         )
-  //       ); // Update donation in state
-  //       resetForm(); // Reset form after successful update
-  //     },
-  //     error: (error) => {
-  //       console.error("Error updating donation:", error);
-  //     },
-  //   });
-  // };
-
-  // Delete a donation
-  // const deleteDonation = (id) => {
-  //   $.ajax({
-  //     url: `https://api.example.com/donations/${id}`, // Replace with your API endpoint
-  //     method: "DELETE",
-  //     success: () => {
-  //       setDonations((prevDonations) =>
-  //         prevDonations.filter((donation) => donation.id !== id)
-  //       ); // Remove donation from state
-  //     },
-  //     error: (error) => {
-  //       console.error("Error deleting donation:", error);
-  //     },
-  //   });
-  // };
-
-  // Handle form input change
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
-  // Set form data for editing
-  const handleEdit = (donation) => {
-    setFormData(donation);
-    setIsEditing(true);
-  };
-
-  // Reset form data
-  const resetForm = () => {
-    setFormData({
-      id: "",
-      name: "",
-      gotra: "",
-      poojaDate: "",
-      donationAmount: "",
-      paymentStatus: "",
-    });
-    setIsEditing(false);
-  };
-
   if (loading) {
-    return <div>Loading...</div>; // Show loading indicator while fetching data
+    return <LoadingData />;
   }
 
   return (
     <div className="card">
-      <h2 style={{ marginTop: "7%", padding: "20px" }}>DONATIONS</h2>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          padding: "2%",
+          marginTop: "5%",
+        }}
+      >
+        <h2 style={{ width: "50%", padding: "0" }}>
+          DONATION ({donationLength})
+        </h2>
+        <div style={{ display: "flex", gap: "1rem" }}>
+          <div
+            className="p-inputgroup"
+            style={{
+              width: "auto",
+              justifyContent: "space-between",
+            }}
+          >
+            <span className="p-inputgroup-addon">
+              <i className="pi pi-search"></i>
+            </span>
+            <InputText
+              type="search"
+              placeholder="Search..."
+              onInput={(e) => setGlobalFilter(e.target.value)}
+            />
+          </div>
+        </div>
+      </div>
+
       {/* 
       <form
         onSubmit={(e) => {
@@ -185,36 +133,73 @@ const Donation = () => {
 
       <DataTable
         value={donations}
-        paginator // Enable pagination
-        rows={5} // Number of rows per page
-        rowsPerPageOptions={[5, 10, 25]} // Options for rows per page
+        paginator
+        rows={5}
+        rowsPerPageOptions={[5, 10, 25]}
         style={{ padding: "0 30px " }}
+        globalFilter={globalFilter}
+        globalFilterFields={[
+          "name",
+          "gotra",
+          "poojaDate",
+          "poojaId",
+          "donationAmount",
+          "poojaName",
+          "paymentStatus",
+        ]}
       >
-        <Column field="name" header="DONOR" />
-        <Column field="gotra" header="GOTRA" />
         <Column
-          field="poojaDate"
+          field="data.name"
+          header="NAME OF"
+          body={(data) => `${data.name}`}
+        />
+        <Column
+          field="data.gotra"
+          header="GOTRA"
+          body={(data) => `${data.gotra}`}
+        />
+        <Column
+          field="data.poojaName"
+          header="POOJA NAME"
+          body={(data) => `${data.poojaName}`}
+        />
+        <Column
+          field="data.poojaId"
+          header="POOJA ID"
+          body={(data) =>
+            Array.isArray(data.poojaId)
+              ? data.poojaId.map((pooja) => pooja.name).join(", ")
+              : data.poojaId
+          }
+        />
+        <Column
+          field="data.poojaDate"
           header="POOJA DATE"
-          body={(data) => new Date(data.poojaDate).toLocaleDateString()}
+          body={(data) =>
+            new Date(data.poojaDate).toLocaleDateString("en-GB", {
+              day: "2-digit",
+              month: "2-digit",
+              year: "numeric",
+            })
+          }
+        />
+
+        <Column
+          field="data.donationAmount"
+          header="DONATION AMOUNT"
+          body={(data) => `₹ ${data.donationAmount}`}
+        />
+
+        <Column
+          field="data.paymentStatus"
+          header="PAYMENT STATUS"
+          body={(data) => `${data.paymentStatus}`}
         />
         <Column
-          field="donationAmount"
-          header="DONATION AMOUNT"
-          body={(data) => `$${data.donationAmount}`}
+          field="data.user.name"
+          header="BOOKED BY"
+          body={(data) => (data.user ? data.user.fullName : "")}
         />
-        <Column field="paymentStatus" header="PAYMENT STATUS" />
-        {/* <Column
-          body={(rowData) => (
-            <>
-              <Button label="Edit" onClick={() => handleEdit(rowData)} />
-              <Button
-                label="Delete"
-                onClick={() => deleteDonation(rowData.id)}
-                className="p-button-danger"
-              />
-            </>
-          )}
-        /> */}
       </DataTable>
     </div>
   );

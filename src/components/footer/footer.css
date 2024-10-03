@@ -1,48 +1,48 @@
 .footer {
-  background-color: #f8f9fa; /* Light gray background */
-  color: #343a40; /* Dark text color */
-  padding: 20px 0; /* Padding top and bottom */
-  position: relative; /* Changed to relative to avoid issues with fixed positioning */
-  width: 100%; /* Full width */
-  text-align: center; /* Center text */
-  border-top: 1px solid #dee2e6; /* Top border */
+  background-color: #f8f9fa;
+  color: #343a40;
+  padding: 20px 0;
+  position: relative;
+  width: 100%;
+  text-align: center;
+  border-top: 1px solid #dee2e6;
 }
 
 .container {
   margin: 0 auto;
-  max-width: 1200px; /* Responsive max width */
-  padding: 0 20px; /* Padding for the container */
+  max-width: 1200px;
+  padding: 0 20px;
 }
 
 .content {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 20px; /* Extra padding for inner content */
+  padding: 0 20px;
 }
 
 .privacy-policy {
-  font-size: 14px; /* Adjusted font size */
+  font-size: 14px;
 }
 
 .social-links {
   display: flex;
-  gap: 15px; /* Consistent spacing */
+  gap: 15px;
   justify-content: flex-end;
   align-items: center;
 }
 
 .social-links i {
-  font-size: 24px; /* Set a larger size for your icons */
-  color: #343a40; /* Icon color */
-  transition: color 0.3s ease; /* Transition effect */
+  font-size: 24px;
+  color: #343a40;
+  transition: color 0.3s ease;
 }
 
 .social-links i:hover {
-  color: #007bff; /* Change color on hover */
+  color: #007bff;
 }
 
 .copyright {
-  margin-top: 10px; /* Spacing above copyright text */
-  font-size: 14px; /* Adjusted font size */
+  margin-top: 10px;
+  font-size: 14px;
 }

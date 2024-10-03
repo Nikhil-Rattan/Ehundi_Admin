@@ -1,19 +1,34 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import secureLocalStorage from "react-secure-storage";
 
 const Navbar = () => {
   const [user, setUser] = useState(null);
   const location = useLocation(); // Get the current location to determine the active link
-
+  const navigate = useNavigate();
+  const [fullName, setName] = useState(false);
   useEffect(() => {
-    const userLoggedIn = localStorage.getItem("user ");
+    const userLoggedIn = localStorage.getItem("user");
     if (userLoggedIn) {
       setUser(userLoggedIn);
+    }
+
+    const adminData = secureLocalStorage.getItem("adminData");
+    if (adminData) {
+      setName(adminData.fullName);
+    }
+    const url = localStorage.getItem("Caturl");
+    if (userLoggedIn) {
+      navigate(url);
+    } else {
+      navigate("/");
     }
   }, []);
 
   const handleLogout = () => {
     localStorage.clear();
+    secureLocalStorage.clear();
     location.reload();
   };
 
@@ -26,13 +41,14 @@ const Navbar = () => {
           zIndex: 20,
           width: "100%",
           backgroundColor: "#ffffff",
-          boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)", // Subtle shadow for depth
+          // boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)", // Subtle shadow for depth
+          padding: "0 2%",
         }}
       >
         <div
           style={{
             padding: "1rem",
-            maxWidth: "1200px",
+            maxWidth: "100vw",
             margin: "0 auto",
             display: "flex",
             justifyContent: "space-between",
@@ -42,7 +58,7 @@ const Navbar = () => {
           {/* Left Section - Logo */}
           <div style={{ height: "50px" }}>
             <img
-              src={"https://i.imgur.com/EvBysQ0.png"}
+              src={"https://i.imgur.com/gtQLr1h.png"}
               style={{
                 height: "100%",
                 width: "auto",
@@ -147,7 +163,7 @@ const Navbar = () => {
                   }}
                 />
                 <span style={{ color: "#333", fontWeight: "bold" }}>
-                  John Doe
+                  {fullName}
                 </span>
               </div>
             ) : null}

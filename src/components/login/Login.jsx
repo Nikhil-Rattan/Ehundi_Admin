@@ -1,31 +1,59 @@
 import { useNavigate } from "react-router-dom";
 import "./login.css";
-import { useEffect } from "react";
+import $ from "jquery";
+import secureLocalStorage from "react-secure-storage";
+import { useState } from "react";
 
 const Login = () => {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = (event) => {
-    event.preventDefault(); // Prevent the default form submission
-
-    // Retrieve the input values
-    const username = event.target.username.value;
+    event.preventDefault();
+    setLoading(true);
+    const email = event.target.username.value;
     const password = event.target.password.value;
 
-    // Define hardcoded credentials (replace with actual authentication logic)
-    const predefinedEmail = "test@e.com"; // Example email
-    const predefinedPassword = "12345"; // Example password
+    const data = JSON.stringify({ email, password });
 
-    // Check if credentials match
-    if (username === predefinedEmail && password === predefinedPassword) {
-      // Redirect to the dashboard and pass user data as state
-      navigate("/dashboard", { state: { username } }); // Sending username as state
-      localStorage.setItem("user ", "loggedin");
-      location.reload();
-    } else {
-      // Optionally, handle invalid credentials (e.g., show an error message)
-      alert("Invalid email or password. Please try again.");
-    }
+    $.ajax({
+      url: "https://ehundi-api.onrender.com/auth/user-Signin",
+      type: "POST",
+      data: data,
+      contentType: "application/json",
+      success: (data) => {
+        setLoading(false);
+
+        if (data) {
+          setLoading(false);
+          if (data.user.role === "admin") {
+            const userData = {
+              email: data.user.email,
+              fullName: data.user.fullName,
+              role: data.user.role,
+              phoneNumber: data.user.phoneNumber,
+              token: data.token,
+            };
+
+            navigate("/dashboard", { state: { data } });
+            localStorage.setItem("user", "loggedin");
+            secureLocalStorage.setItem("adminData", userData);
+            location.reload();
+          } else {
+            setLoading(false);
+            alert("You are not Authorised");
+          }
+        } else {
+          setLoading(false);
+          alert("Login failed. Please check your credentials.");
+        }
+      },
+      error: (xhr, status, error) => {
+        console.error("Login request failed:", error);
+        alert("Login failed. Please try again later.");
+        setLoading(false);
+      },
+    });
   };
 
   return (
@@ -69,7 +97,7 @@ const Login = () => {
               </div>
               <div className="submit-button-container">
                 <button type="submit" className="submit-button">
-                  Sign In
+                  {loading ? "Please wait..." : "Sign In"}
                 </button>
               </div>
             </form>

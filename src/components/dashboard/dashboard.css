@@ -1,46 +1,96 @@
 .container {
-  width: 90%;
-  height: 60vh;
-  margin: 0 auto;
+  width: 100%;
+  height: 100vh;
+  margin-top: 5%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  /* justify-content: center; */
+  height: 100vh;
+  padding-top: 6%;
+
+  /* Background settings */
+
+  /* Prevent image repetition */
+}
+.bg {
+  background-image: url("https://www.murugantemple.com/wp-content/uploads/2021/05/slider1.jpg"); /* Set background image */
+  background-size: cover; /* Ensure the image covers the entire container */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat;
+  object-fit: contain;
+  border: "2px solid red";
+  color: white;
+  width: "100%"; /* Text color for better contrast */
+  height: "60vh";
+}
+.seconContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 2%;
+  /* margin-bottom: 1rem; Space between second container and profile */
 }
 
 .header {
   font-size: 1.5rem;
   font-weight: bold;
   text-align: center;
-  margin: 1rem 0;
+  margin-bottom: 1.5rem; /* Ensure spacing between header and profile */
+  background-color: #76727ccb;
+  padding: 0 2rem;
+  border-radius: 5px;
 }
 
 .profile-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 1.5rem;
+  width: 100%; /* Make sure container stretches full width */
+  margin-bottom: 1rem; /* Space between profile containers */
 }
 
 .profile-box {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background-color: #ebf8ff;
+  align-items: center; /* Ensure content is centered */
+  background-color: rgba(
+    235,
+    248,
+    255,
+    0.9
+  ); /* Use a slightly transparent background */
   padding: 1rem;
   border-radius: 0.5rem;
   gap: 0.5rem;
-  width: 100%;
-  max-width: 16rem;
+  width: 100%; /* Stretch to container width */
+  max-width: 16rem; /* Set maximum width */
   border: 2px solid #63b3ed;
   text-align: center;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.text {
+  color: #333;
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.number {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #2d3748;
 }
 
 .profile-status {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
   justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1rem; /* Space between profile box and status */
 }
 
 .icon {
@@ -52,4 +102,5 @@
   font-weight: bold;
   font-size: 1rem;
   font-family: "Arial", sans-serif;
+  color: #2d3748; /* Darker color for contrast */
 }

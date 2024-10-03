@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
-import Dashboard from "./components/Dashboard/Dashboard";
-import Login from "./components/Login/Login";
+import Dashboard from "./components/dashboard/Dashboard";
+import Login from "./components/login/Login";
 import User from "./components/user/User";
 import Donation from "./components/donation/Donation";
 import Category from "./components/category/Category";

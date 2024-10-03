@@ -6,15 +6,13 @@ const Profile = () => {
 
   const handleToggleLogin = () => {
     if (isLoggedIn) {
-      // Log out process
       setUser(null);
       setIsLoggedIn(false);
     } else {
-      // Simulate a sign-in process (replace with actual auth logic)
       const fakeUser = {
         name: "John Doe",
         profilePicture: "https://via.placeholder.com/150",
-      }; // Replace with actual user data
+      };
       setUser(fakeUser);
       setIsLoggedIn(true);
     }
@@ -31,7 +29,6 @@ const Profile = () => {
     >
       {isLoggedIn ? (
         <div>
-          {/* Display circular profile picture */}
           <img
             src={user?.profilePicture}
             alt="Profile"
