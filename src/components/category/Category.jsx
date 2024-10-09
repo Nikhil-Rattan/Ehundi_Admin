@@ -21,7 +21,7 @@ const CategoriesTable = () => {
     description: "",
     price: "",
     parentCategory: null,
-    mainCategory: "",
+    poojaCategory: "",
   });
   const [editingCategory, setEditingCategory] = useState(null);
   const [parentCategories, setParentCategories] = useState([]);
@@ -29,8 +29,8 @@ const CategoriesTable = () => {
   const [visible, setVisible] = useState(false);
   const [categoryLength, setCategoryLength] = useState(0);
   const [mainCategories] = useState([
-    { name: "Pooja", value: "Pooja" },
-    { name: "upcoming Pooja", value: "upcoming Pooja" },
+    { name: "Pooja Booking", value: "Pooja Booking" },
+    { name: "Upcoming Pooja", value: "Upcoming Pooja" },
   ]);
 
   useEffect(() => {
@@ -38,6 +38,7 @@ const CategoriesTable = () => {
     fetchParentCategories();
     localStorage.setItem("Caturl", "/category");
   }, []);
+  console.log(newCategory, "uououo");
 
   const fetchCategories = () => {
     setLoading(true);
@@ -45,8 +46,10 @@ const CategoriesTable = () => {
       url: "https://ehundi-api.onrender.com/api/categories",
       method: "GET",
       success: (data) => {
-        setCategories(data);
-        setCategoryLength(data.length);
+        console.log(data);
+
+        setCategories(data.data);
+        setCategoryLength(data.data.length);
         setLoading(false);
       },
       error: (xhr, status, error) => {
@@ -143,8 +146,8 @@ const CategoriesTable = () => {
       image: "",
       description: "",
       price: "",
-      mainCategory: "",
-      parentCategory: "",
+      poojaCategory: "",
+      parentCategory: null,
     });
     setEditingCategory(null);
     setVisible(false);
@@ -190,6 +193,7 @@ const CategoriesTable = () => {
             description: rowData.description,
             price: rowData.price,
             parentCategory: rowData.parentCategory,
+            poojaCategory: rowData.poojaCategory,
           });
           setVisible(true);
         }}
@@ -210,7 +214,7 @@ const CategoriesTable = () => {
   }
 
   return (
-    <div className="card">
+    <div className="card" style={{ height: "auto" }}>
       <Toast ref={toast} />
       <ConfirmDialog />
       <div
@@ -252,7 +256,7 @@ const CategoriesTable = () => {
           />
         </div>
       </div>
-      <div>
+      <div style={{ height: "auto" }}>
         <DataTable
           value={categories}
           paginator
@@ -272,6 +276,11 @@ const CategoriesTable = () => {
             field="parentCategory"
             header="PARENT CATEGORY"
             body={(rowData) => rowData.parentCategory?.name || "Main Category"}
+          />
+          <Column
+            field="poojaCategory"
+            header="POOJA CATEGORY"
+            body={(rowData) => rowData.poojaCategory}
           />
           <Column field="action" header="ACTION" body={actionBodyTemplate} />
         </DataTable>
@@ -379,15 +388,19 @@ const CategoriesTable = () => {
               }}
             >
               <div>
-                <label htmlFor="mainCategory">Main Category</label>
+                <label htmlFor="poojaCategory">Pooja Category</label>
                 <Dropdown
-                  id="mainCategory"
-                  value={newCategory.mainCategory}
+                  id="poojaCategory"
+                  value={newCategory.poojaCategory}
                   options={mainCategories}
                   style={{ marginTop: "0.5rem", width: "100%" }}
-                  onChange={(e) =>
-                    setNewCategory({ ...newCategory, mainCategory: e.value })
-                  }
+                  onChange={(e) => {
+                    console.log(e.value);
+                    setNewCategory({
+                      ...newCategory,
+                      poojaCategory: e.value,
+                    });
+                  }}
                   optionLabel="name"
                   placeholder="Select Main Category"
                 />
@@ -400,7 +413,10 @@ const CategoriesTable = () => {
                   options={parentCategories}
                   style={{ marginTop: "0.5rem", width: "100%" }}
                   onChange={(e) =>
-                    setNewCategory({ ...newCategory, parentCategory: e.value })
+                    setNewCategory({
+                      ...newCategory,
+                      parentCategory: e.target.value ? e.target.value : null,
+                    })
                   }
                   optionLabel="name"
                   placeholder="Select a Parent Category"

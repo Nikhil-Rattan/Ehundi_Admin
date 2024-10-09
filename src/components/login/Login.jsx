@@ -8,6 +8,60 @@ const Login = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
+  const looginLoading = () => (
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <span>Please wait</span>
+      <span className="dot-animation"></span>
+      <style>
+        {`
+        @keyframes dots {
+          0% {
+            content: '...';
+          }
+          33% {
+            content: '.';
+          }
+          66% {
+            content: '..';
+          }
+          100% {
+            content: '...';
+          }
+        }
+
+        .dot-animation::after {
+          content: '';
+          animation: dots 1s steps(3, end) infinite;
+          display: inline-block;
+          width: 1rem;
+          text-align: left;
+        }
+      `}
+      </style>
+    </div>
+  );
+
+  function togglePasswordVisibility() {
+    const passwordInput = document.getElementById("password");
+    const eyeIcon = document.getElementById("eyeIcon");
+
+    if (passwordInput.type === "password") {
+      passwordInput.type = "text";
+      eyeIcon.classList.remove("fa-eye");
+      eyeIcon.classList.add("fa-eye-slash");
+    } else {
+      passwordInput.type = "password";
+      eyeIcon.classList.remove("fa-eye-slash");
+      eyeIcon.classList.add("fa-eye");
+    }
+  }
+
   const handleSubmit = (event) => {
     event.preventDefault();
     setLoading(true);
@@ -23,6 +77,7 @@ const Login = () => {
       contentType: "application/json",
       success: (data) => {
         setLoading(false);
+        console.log("data", data);
 
         if (data) {
           setLoading(false);
@@ -92,12 +147,21 @@ const Login = () => {
 
                 <div className="input-field password-custom">
                   <label htmlFor="password">Enter Your Password</label>
-                  <input type="password" id="password" name="password" />
+                  <div style={{ display: "flex", alignItems: "center" }}>
+                    <input type="password" id="password" name="password" />
+                    <span
+                      className="toggle-password"
+                      style={{ marginTop: "1.5rem" }}
+                      onClick={togglePasswordVisibility}
+                    >
+                      <i id="eyeIcon" className="fa fa-eye"></i>
+                    </span>
+                  </div>
                 </div>
               </div>
               <div className="submit-button-container">
                 <button type="submit" className="submit-button">
-                  {loading ? "Please wait..." : "Sign In"}
+                  {loading ? looginLoading() : "Sign In"}{" "}
                 </button>
               </div>
             </form>

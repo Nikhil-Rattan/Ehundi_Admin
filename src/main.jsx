@@ -15,9 +15,11 @@ const root = createRoot(rootElement); // createRoot replaces ReactDOM.render
 
 root.render(
   <BrowserRouter>
-    <div style={{ width: "100%", height: "107vh" }}>
+    <div style={{ width: "100%", height: "auto" }}>
       <Navbar />
-      <App />
+      <div style={{ marginBottom: "3.1rem" }}>
+        <App />
+      </div>
       <Footer />
     </div>
   </BrowserRouter>
