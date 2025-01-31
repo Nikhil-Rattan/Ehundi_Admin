@@ -71,7 +71,8 @@ const Login = () => {
     const data = JSON.stringify({ email, password });
 
     $.ajax({
-      url: "https://ehundi-api.onrender.com/auth/user-Signin",
+      // url: "https://ehundi-api.onrender.com/auth/user-Signin",
+      url: "https://ehundi-admin.simplemindsedu.com/auth/user-Signin",
       type: "POST",
       data: data,
       contentType: "application/json",
