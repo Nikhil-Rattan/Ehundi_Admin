@@ -21,7 +21,7 @@ const Donation = () => {
   const fetchDonations = () => {
     setLoading(true);
     $.ajax({
-      url: "https://ehundi-api.onrender.com/api/newDonations",
+      url: "https://ehundi-admin.simplemindsedu.com/api/newDonations",
       method: "GET",
       dataType: "json",
       success: (data) => {

@@ -25,7 +25,7 @@ const User = () => {
   const fetchUsers = () => {
     setLoading(true);
     $.ajax({
-      url: "https://ehundi-api.onrender.com/auth/user-Profile",
+      url: "https://ehundi-admin.simplemindsedu.com/auth/user-Profile",
       method: "GET",
       success: (data) => {
         setUsers(data);

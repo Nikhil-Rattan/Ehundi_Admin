@@ -43,7 +43,7 @@ const CategoriesTable = () => {
   const fetchCategories = () => {
     setLoading(true);
     $.ajax({
-      url: "https://ehundi-api.onrender.com/api/categories",
+      url: "https://ehundi-admin.simplemindsedu.com/api/categories",
       method: "GET",
       success: (data) => {
         console.log(data);
@@ -62,7 +62,7 @@ const CategoriesTable = () => {
 
   const fetchParentCategories = () => {
     $.ajax({
-      url: "https://ehundi-api.onrender.com/api/categories/root-categories",
+      url: "https://ehundi-admin.simplemindsedu.com/api/categories/root-categories",
       method: "GET",
       success: (data) => {
         setParentCategories(data?.categories || []);
@@ -91,8 +91,8 @@ const CategoriesTable = () => {
     if (validateCategory()) {
       const requestType = editingCategory ? "PUT" : "POST";
       const url = editingCategory
-        ? `https://ehundi-api.onrender.com/api/categories/${editingCategory._id}`
-        : "https://ehundi-api.onrender.com/api/categories";
+        ? `https://ehundi-admin.simplemindsedu.com/api/categories/${editingCategory._id}`
+        : "https://ehundi-admin.simplemindsedu.com/api/categories";
 
       $.ajax({
         url: url,
@@ -166,7 +166,7 @@ const CategoriesTable = () => {
 
   const deleteCategory = (id) => {
     $.ajax({
-      url: `https://ehundi-api.onrender.com/api/categories/${id}`,
+      url: `https://ehundi-admin.simplemindsedu.com/api/categories/${id}`,
       method: "DELETE",
       success: () => {
         setCategories((prevCategories) =>

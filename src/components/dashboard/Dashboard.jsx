@@ -23,7 +23,7 @@ const Dashboard = () => {
   const fetchDashoardStatus = () => {
     setLoading(true);
     $.ajax({
-      url: "https://ehundi-api.onrender.com/api/dasboardStats",
+      url: "https://ehundi-admin.simplemindsedu.com/api/dasboardStats",
       method: "GET",
       dataType: "json",
       success: (data) => {
